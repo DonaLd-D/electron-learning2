@@ -8,20 +8,24 @@
 </head>
 <body>
   <h1>Window</h1>
-  <button>按钮</button>
+  <button>按钮1</button>
+  <button>按钮2</button>
   <script>
     const { remote, ipcRenderer } = require('electron');
     // console.log(username); // 直接拿主进程中的全局变量内容是拿不到的
     // 但是可以通过 electron 的 romote 属性的 getGloabal() 来拿到
     console.log(remote.getGlobal('username'));
-
-    const btn = document.querySelectorAll('button')[0];
-    btn.onclick = function() {
+    
+    const btns = document.querySelectorAll('button');
+    btns[0].onclick = function() {
       ipcRenderer.send('getData', 'username');
     }
     ipcRenderer.on('sendData', function(e, data) {
       console.log(e, data);
     })
+    btns[1].onclick = function() {
+      localStorage.setItem('myname', 'paian');
+    }
   </script>
 </body>
 </html>

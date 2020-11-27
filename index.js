@@ -21,4 +21,14 @@ app.on('ready', () => {
     // 通过e.sender对象返回消息给渲染进程
     e.sender.send('sendData', datas[key]);
   })
+
+  const win2 = new BrowserWindow({
+    webPreferences: {
+        nodeIntegration: true,
+        enableRemoteModule: true
+    }
+  });
+  win2.webContents.openDevTools(); //打开调试面板
+  win2.loadFile('./layout/index2.html'); //载入web页面
+
 });
