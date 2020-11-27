@@ -6,9 +6,15 @@ const datas = {
   gender: 'male'
 };
 app.on('ready', () => {
-  const win = new BrowserWindow();
+  const win = new BrowserWindow({
+    webPreferences: {
+        nodeIntegration: true,
+        enableRemoteModule: true
+    }
+  });
   win.webContents.openDevTools(); //打开调试面板
   win.loadFile('./layout/index.html'); //载入web页面
+
   // 监听渲染进程发送过来的消息
   ipcMain.on('getData', function (e, key) {
     console.log(key);
