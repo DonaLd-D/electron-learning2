@@ -5,26 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <style>
-    .header {
-        -webkit-app-region: drag;
-        border: 1px solid #eee;
-    }
-    .header .close{
-        -webkit-app-region: no-drag;
-        border: 1px solid #eee;
-    }
-    .header .min{
-        -webkit-app-region: no-drag;
-        border: 1px solid #eee;
-    }
-  </style>
 </head>
 <body>
-    <div class='header'>
-        <button class="close">close</button>
-        <button class="min">min</button>
-    </div>
     <h1>Window</h1>
     <button>按钮1</button>
     <button>按钮2</button>
@@ -35,13 +17,13 @@
     console.log(remote.getGlobal('username'));
 
     const btns = document.querySelectorAll('button');
-    btns[2].onclick = function() {
+    btns[0].onclick = function() {
     ipcRenderer.send('getData', 'username');
     }
     ipcRenderer.on('sendData', function(e, data) {
     console.log(e, data);
     })
-    btns[3].onclick = function() {
+    btns[1].onclick = function() {
     localStorage.setItem('myname', 'paian');
     }
 </script>

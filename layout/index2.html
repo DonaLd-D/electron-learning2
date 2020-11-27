@@ -5,16 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+    .header {
+      -webkit-app-region: drag;
+      display: flex;
+    }
+    .header .close {
+      -webkit-app-region: no-drag;
+      border: 1px solid #eee;
+    }
+    .header .mini {
+      -webkit-app-region: no-drag;
+      border: 1px solid #eee;
+    }
+    .header .title {
+      flex: 1;
+    }
+    .header .button {
+      display: inline-block;
+      cursor: pointer;
+      width: 30px;
+      text-align: center;
+    }
+    .header .button:focus {
+      border: none;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-  <h1>Window2</h1>
-  <button>按钮</button>
+  <div id="root">
+    <header class="header">
+      <h1 class="title" v-text="title"></h1>
+      <div class="buttons">
+        <a class="button mini" @click="miniWindow">-</a>
+        <a class="button close" @click="closeApp">x</a>
+      </div>
+    </header>
+  </div>
   <script>
-    const btns = document.querySelectorAll('button');
-    btns[0].onclick = function() {
-      const myname = localStorage.getItem('myname');
-      console.log(myname);
-    };
+    const {
+      remote
+    } = require('electron');
+    new Vue({
+      el: '#root',
+      data: {
+        title: 'Window2'
+      },
+      methods: {
+        closeApp() {
+          // 关闭整个应用，当有多个窗口时，多个窗口均会被关闭
+          remote.app.exit();
+        },
+        miniWindow() {
+          // 只是最小化当前窗口
+          remote.getCurrentWindow().minimize();
+        }
+      }
+    });
   </script>
 </body>
 </html>

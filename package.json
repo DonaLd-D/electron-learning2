@@ -10,6 +10,7 @@
   "author": "vincent",
   "license": "ISC",
   "dependencies": {
-    "electron": "^11.0.3"
+    "electron": "^11.0.3",
+    "vue": "^2.6.12"
   }
 }
