@@ -4,13 +4,36 @@
   "description": "my-electron-demo",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/electron .",
+    "build": "./node_modules/.bin/electron-builder -w"
   },
   "author": "vincent",
   "license": "ISC",
   "dependencies": {
-    "electron": "^11.0.3",
     "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "electron": "^11.0.3",
+    "electron-builder": "^22.9.1"
+  },
+  "build": {
+    "appId": "com.abc.paian",
+    "copyright": "copyright © 2018 paian",
+    "productName": "my-electron-demo",
+    "directories": {
+      "output": "./dist"
+    },
+    "win": {
+      "target": ["nsis", "zip"],
+      "icon": "./source/logo.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "./source/logo.ico",
+      "installerHeader": "./source/header.bmp",
+      "license": "./source/license.txt"
+    }
   }
 }
